@@ -623,7 +623,7 @@ header::before {
 }
 
 /* --- Evidence Section --- */
-.evidence-filters {
+.evidence-filters, .archive-filters {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -1587,7 +1587,7 @@ dialog::backdrop {
   }
   
   header, .theme-toggle, .menu-btn, .mobile-nav, 
-  .hero-actions-container, .evidence-filters, .archive-bar,
+  .hero-actions-container, .evidence-filters, .archive-filters, .archive-bar,
   .contact-container, footer, dialog, .badge-evidence {
     display: none !important;
   }
