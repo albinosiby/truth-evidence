@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Truth & Evidence - Investigative Incident Report</title>
+  <meta name="description" content="A documented record and verified evidence regarding an alleged education credit transfer and admission fraud. Explore receipts, chats, and official communications.">
+  
+  <!-- Modern CSS Grid/Resets & Custom styles -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Prevent FOUC (Flash of Unstyled Content) by setting theme early -->
+  <meta name="color-scheme" content="light dark">
+  <script>
+    {
+      const colorScheme = localStorage.getItem('color-scheme');
+      if (colorScheme) {
+        document.documentElement.setAttribute('data-theme', colorScheme);
+        const metaColor = document.querySelector('meta[name="color-scheme"]');
+        if (metaColor) metaColor.content = colorScheme;
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- ==========================================
+       HEADER & NAVIGATION
+       ========================================== -->
+  <header>
+    <div class="container header-container">
+      <a href="#" class="logo">
+        <span>TRUTH</span>&nbsp;&amp;&nbsp;EVIDENCE
+      </a>
+      
+      <nav class="nav-menu">
+        <a href="#what-happened" class="nav-link">What Happened</a>
+        <a href="#timeline" class="nav-link">Timeline</a>
+        <a href="#evidence" class="nav-link">Evidence</a>
+        <a href="#facts-vs-opinions" class="nav-link">Facts vs Claims</a>
+        <a href="#lessons" class="nav-link">Lessons</a>
+        <a href="#archive" class="nav-link">Archive</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+      
+      <div class="header-actions">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle visual theme" title="Toggle theme">
+          <!-- Moon Icon (for Light Mode -> Dark Mode) -->
+          <svg class="moon-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"></path></svg>
+          <!-- Sun Icon (for Dark Mode -> Light Mode) -->
+          <svg class="sun-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path></svg>
+        </button>
+        
+        <button id="menuBtn" class="menu-btn" aria-label="Open mobile menu">
+          <svg style="width:24px; height:24px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobileBackdrop" class="mobile-nav-backdrop"></div>
+  <div id="mobileNav" class="mobile-nav">
+    <div class="mobile-nav-header">
+      <div class="logo"><span>TRUTH</span>&nbsp;&amp;&nbsp;EVIDENCE</div>
+      <button id="closeMobileNav" class="menu-btn" aria-label="Close mobile menu">
+        <svg style="width:24px; height:24px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="#what-happened" class="mobile-nav-link">What Happened</a>
+      <a href="#timeline" class="mobile-nav-link">Timeline</a>
+      <a href="#evidence" class="mobile-nav-link">Evidence</a>
+      <a href="#facts-vs-opinions" class="mobile-nav-link">Facts vs Claims</a>
+      <a href="#lessons" class="mobile-nav-link">Lessons</a>
+      <a href="#archive" class="mobile-nav-link">Archive</a>
+      <a href="#faq" class="mobile-nav-link">FAQ</a>
+      <a href="#contact" class="mobile-nav-link">Contact</a>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       HERO SECTION
+       ========================================== -->
+  <section class="hero">
+    <div class="container hero-content">
+      <span class="hero-tagline">An Investigative Case Report</span>
+      <h1 class="hero-headline">
+        "18 years of trust... but what was lost was money, <em>education</em>, and peace of mind."
+      </h1>
+      <p class="hero-intro">
+        A chronological documentation of an alleged educational transfer and registration scam, compiled to present the facts clearly using verified transactions, correspondence, and responses.
+      </p>
+      
+      <div class="disclaimer-box">
+        <div class="disclaimer-title">
+          <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          Verification Disclaimer
+        </div>
+        <p class="disclaimer-text">
+          This website documents our experience using supporting evidence. Every statement presented is based on documents, conversations, receipts, or other available records. Readers are encouraged to review the evidence and form their own conclusions.
+        </p>
+      </div>
+      
+      <div class="hero-actions-container">
+        <a href="#timeline" class="btn btn-primary">Read the Timeline</a>
+        <a href="#evidence" class="btn btn-secondary">View Evidence</a>
+        <a href="#what-happened" class="btn btn-secondary">What Happened</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       WHAT HAPPENED SECTION
+       ========================================== -->
+  <section id="what-happened" class="section">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2 class="section-title">What Happened</h2>
+        <p class="section-subtitle">
+          An overview of the event sequence leading to the academic stall of two aspiring students, driven by misrepresentation and unfulfilled promises.
+        </p>
+      </div>
+      
+      <div class="story-grid">
+        <!-- Card 1 -->
+        <div class="story-card">
+          <div class="story-num">01</div>
+          <div class="story-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          </div>
+          <h3 class="story-card-title">Higher Education Goals</h3>
+          <p class="story-card-text">
+            Two students wanted to continue their higher education and secure credit transfers to complete their degrees without losing academic progress.
+          </p>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="story-card">
+          <div class="story-num">02</div>
+          <div class="story-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+          </div>
+          <h3 class="story-card-title">Family Trust</h3>
+          <p class="story-card-text">
+            They trusted an intermediary who was known to their family for over 18 years, expecting complete professional and ethical standard compliance.
+          </p>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="story-card">
+          <div class="story-num">03</div>
+          <div class="story-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="story-card-title">Direct Assurances</h3>
+          <p class="story-card-text">
+            The intermediary assured that the credit transfer procedures and formal university admission processes would be fully managed by them.
+          </p>
+        </div>
+        
+        <!-- Card 4 -->
+        <div class="story-card">
+          <div class="story-num">04</div>
+          <div class="story-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="story-card-title">Payments Deposited</h3>
+          <p class="story-card-text">
+            Large sums of money ($7,700 total) were transferred directly to the intermediary's bank account to cover reservation and admission deposits.
+          </p>
+        </div>
+        
+        <!-- Card 5 -->
+        <div class="story-card">
+          <div class="story-num">05</div>
+          <div class="story-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="story-card-title">Discontinuation Directive</h3>
+          <p class="story-card-text">
+            The intermediary instructed both students to discontinue classes and withdraw from their current college to make way for the new enrollment portal.
+          </p>
+        </div>
+        
+        <!-- Card 6 -->
+        <div class="story-card">
+          <div class="story-num">06</div>
+          <div class="story-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          </div>
+          <h3 class="story-card-title">Scam Uncovered</h3>
+          <p class="story-card-text">
+            Weeks later, direct contact with the university registrar revealed that no application existed and the admission process had never been completed.
+          </p>
+        </div>
+      </div>
+      
+      <div style="background-color: var(--accent-soft); border-radius: var(--border-radius-md); padding: 2rem; margin-top: 3rem; text-align: center; border: 1px solid rgba(var(--accent-rgb), 0.1);">
+        <p style="font-size: 1.1rem; font-weight: 500; line-height: 1.6;">
+          Following the discovery, multiple delays and repeated false assurances occurred. The intermediary claimed server maintenance issues and administrative backlogs, refusing to facilitate direct face-to-face verification.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       TIMELINE SECTION
+       ========================================== -->
+  <section id="timeline" class="section">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2 class="section-title">Chronological Timeline</h2>
+        <p class="section-subtitle">
+          A step-by-step breakdown of how the events unfolded, from initial consultation to legal actions.
+        </p>
+      </div>
+      
+      <div class="timeline-container">
+        <!-- Item 1 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">August 05, 2024</div>
+          <div class="timeline-card">
+            <h3 class="timeline-title">Initial Discussion</h3>
+            <p class="timeline-desc">First physical meeting with the family acquaintance. Plans for college credit transfer and enrollment are discussed and verbally agreed upon.</p>
+            <button onclick="triggerEvidenceModal('whatsapp-chat-1')" class="badge badge-evidence">Evidence: Chats</button>
+          </div>
+        </div>
+        
+        <!-- Item 2 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">August 14, 2024</div>
+          <div class="timeline-card">
+            <h3 class="timeline-title">Money Transferred ($4,200)</h3>
+            <p class="timeline-desc">The initial deposit and credit evaluation fee totaling $4,200 is transferred via bank account to secure transfer registration slots.</p>
+            <button onclick="triggerEvidenceModal('bank-transfer-1')" class="badge badge-evidence">Evidence: Transaction</button>
+          </div>
+        </div>
+        
+        <!-- Item 3 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">August 20, 2024</div>
+          <div class="timeline-card">
+            <h3 class="timeline-title">Promise of Admission</h3>
+            <p class="timeline-desc">Verbal assurances are given by the intermediary stating that the admissions board has approved both credit folders and registrations.</p>
+            <button onclick="triggerEvidenceModal('whatsapp-chat-1')" class="badge badge-evidence">Evidence: Chats</button>
+          </div>
+        </div>
+        
+        <!-- Item 4 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">September 06, 2024</div>
+          <div class="timeline-card">
+            <h3 class="timeline-title">Students Withdraw from College</h3>
+            <p class="timeline-desc">Following explicit written instructions from the intermediary to prevent dual registration conflicts, the students withdraw from their active college.</p>
+            <button onclick="triggerEvidenceModal('whatsapp-chat-2')" class="badge badge-evidence">Evidence: Chats</button>
+          </div>
+        </div>
+        
+        <!-- Item 5 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">September 12, 2024</div>
+          <div class="timeline-card">
+            <h3 class="timeline-title">Second Transfer ($3,500)</h3>
+            <p class="timeline-desc">An additional tuition advance sum of $3,500 is transferred under the representation that admission ID creation is pending processing.</p>
+            <button onclick="triggerEvidenceModal('bank-transfer-2')" class="badge badge-evidence">Evidence: Transaction</button>
+          </div>
+        </div>
+        
+        <!-- Item 6 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">October 15, 2024</div>
+          <div class="timeline-card">
+            <h3 class="timeline-title">Discovery of Falsified Status</h3>
+            <p class="timeline-desc">After persistent delay excuses, student guardians contact the university registrar, discovering that no application records exist.</p>
+            <button onclick="triggerEvidenceModal('whatsapp-chat-3')" class="badge badge-evidence">Evidence: Chats</button>
+          </div>
+        </div>
+        
+        <!-- Item 7 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">October 20, 2024</div>
+          <div class="timeline-card">
+            <h3 class="timeline-title">Deflections & Repeated Promises</h3>
+            <p class="timeline-desc">Confronted with the registrar inquiry results, the intermediary deflects responsibility, claiming server issues and administrative errors.</p>
+            <button onclick="triggerEvidenceModal('call-records-1')" class="badge badge-evidence">Evidence: Call Log</button>
+          </div>
+        </div>
+        
+        <!-- Item 8 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">November 02, 2024</div>
+          <div class="timeline-card">
+            <h3 class="timeline-title">Family Meetings</h3>
+            <p class="timeline-desc">Stalled discussions in physical meetings fail to yield any genuine admission documentation or payment returns.</p>
+            <button onclick="triggerEvidenceModal('university-response-1')" class="badge badge-evidence">Evidence: Official Response</button>
+          </div>
+        </div>
+        
+        <!-- Item 9 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">December 18, 2024</div>
+          <div class="timeline-card">
+            <h3 class="timeline-title">Legal Counsel Demand Notice</h3>
+            <p class="timeline-desc">Attorneys representing the family issue a formal letter demanding restitution and transparency regarding the funds.</p>
+            <button onclick="triggerEvidenceModal('legal-notice-1')" class="badge badge-evidence">Evidence: Legal Notice</button>
+          </div>
+        </div>
+        
+        <!-- Item 10 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Current Status</div>
+          <div class="timeline-card">
+            <h3 class="timeline-title">Civil and Investigative Review</h3>
+            <p class="timeline-desc">Legal proceedings are ongoing, and this repository of public record has been compiled to document the facts and warn other families.</p>
+            <span class="badge" style="background-color: var(--border-color); color: var(--text-primary);">Awaiting Resolution</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       EVIDENCE GALLERY
+       ========================================== -->
+  <section id="evidence" class="section">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2 class="section-title">Verified Evidence</h2>
+        <p class="section-subtitle">
+          Browse categorised elements documenting the details of transactions, correspondence, and responses.
+        </p>
+      </div>
+      
+      <div class="evidence-filters">
+        <button class="filter-btn active" data-filter="all">All Categories</button>
+        <button class="filter-btn" data-filter="Bank Transactions">Transactions</button>
+        <button class="filter-btn" data-filter="WhatsApp Chats">WhatsApp Chats</button>
+        <button class="filter-btn" data-filter="University Responses">University Responses</button>
+        <button class="filter-btn" data-filter="Call Records">Call Records</button>
+        <button class="filter-btn" data-filter="Legal Documents">Legal Notice</button>
+      </div>
+      
+      <div class="evidence-grid">
+        <!-- Card 1 -->
+        <div class="evidence-card" data-category="Bank Transactions">
+          <div class="evidence-header">
+            <div class="evidence-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+            </div>
+            <span class="badge" style="background-color: var(--bg-tertiary); color: var(--text-secondary);">Bank</span>
+          </div>
+          <h3 class="evidence-title">Initial Deposit Transfer</h3>
+          <p class="evidence-desc">Confirmation receipt detailing $4,200 transfer to intermediary's accounts on Aug 14, 2024.</p>
+          <div onclick="triggerEvidenceModal('bank-transfer-1')" class="evidence-preview-box">
+            <div class="evidence-preview-overlay">VIEW HIGH-FIDELITY DOCUMENT</div>
+            <div style="font-family: monospace; font-size: 0.75rem; text-align: left; padding: 1rem; width:100%;">
+              <strong>REF: TXN8892019927A</strong><br>
+              Date: 14 Aug 2024<br>
+              Amount: $4,200.00<br>
+              Status: Successful
+            </div>
+          </div>
+          <div class="evidence-actions">
+            <button onclick="triggerEvidenceModal('bank-transfer-1')" class="btn btn-secondary">View Detail</button>
+            <button class="btn btn-primary" onclick="alert('Downloading Secure PDF transaction records.')">Download PDF</button>
+          </div>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="evidence-card" data-category="WhatsApp Chats">
+          <div class="evidence-header">
+            <div class="evidence-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+            </div>
+            <span class="badge" style="background-color: var(--bg-tertiary); color: var(--text-secondary);">Chat</span>
+          </div>
+          <h3 class="evidence-title">Withdrawal Directives</h3>
+          <p class="evidence-desc">Text logs instructing students to immediately exit current classes to prevent dual registration.</p>
+          <div onclick="triggerEvidenceModal('whatsapp-chat-2')" class="evidence-preview-box">
+            <div class="evidence-preview-overlay">VIEW HIGH-FIDELITY DOCUMENT</div>
+            <div style="font-family: monospace; font-size: 0.75rem; text-align: left; padding: 1rem; width:100%;">
+              <strong>WhatsApp Thread Sept 05</strong><br>
+              "Students must discontinue attending classes... Dual enrollment will block registration..."
+            </div>
+          </div>
+          <div class="evidence-actions">
+            <button onclick="triggerEvidenceModal('whatsapp-chat-2')" class="btn btn-secondary">View Detail</button>
+            <button class="btn btn-primary" onclick="alert('Downloading Secure PDF transcripts.')">Download PDF</button>
+          </div>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="evidence-card" data-category="University Responses">
+          <div class="evidence-header">
+            <div class="evidence-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+            </div>
+            <span class="badge" style="background-color: var(--bg-tertiary); color: var(--text-secondary);">Official</span>
+          </div>
+          <h3 class="evidence-title">Registrar Statement</h3>
+          <p class="evidence-desc">Official verification letter stating that the university holds zero records for the students.</p>
+          <div onclick="triggerEvidenceModal('university-response-1')" class="evidence-preview-box">
+            <div class="evidence-preview-overlay">VIEW HIGH-FIDELITY DOCUMENT</div>
+            <div style="font-family: monospace; font-size: 0.75rem; text-align: left; padding: 1rem; width:100%;">
+              <strong>STATE UNIVERSITY OF SCIENCE</strong><br>
+              Ref: REG/2024/7781-INF<br>
+              "...no applications, transfers, or tuition payments received..."
+            </div>
+          </div>
+          <div class="evidence-actions">
+            <button onclick="triggerEvidenceModal('university-response-1')" class="btn btn-secondary">View Detail</button>
+            <button class="btn btn-primary" onclick="alert('Downloading registrar certified letters.')">Download PDF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FACTS VS CLAIMS
+       ========================================== -->
+  <section id="facts-vs-opinions" class="section" style="background-color: var(--bg-secondary);">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2 class="section-title">Facts vs Claims</h2>
+        <p class="section-subtitle">
+          Distinguishing objectively verified and documented records from unverified personal interpretations.
+        </p>
+      </div>
+      
+      <div class="compare-container">
+        <!-- Documented Facts -->
+        <div class="compare-col compare-facts">
+          <h3 class="compare-col-title">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Documented Facts
+          </h3>
+          <div class="compare-list">
+            <div class="compare-item">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+              <div class="compare-item-content">
+                <strong>Financial Ledger Records</strong>
+                <span>Bank statements confirm two distinct transaction transfers totaling $7,700 to the intermediary's account.</span>
+              </div>
+            </div>
+            <div class="compare-item">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+              <div class="compare-item-content">
+                <strong>Absolute Absence of Registration</strong>
+                <span>Written responses from the State University Registrar confirm no admissions, credit transfers, or applications were ever submitted.</span>
+              </div>
+            </div>
+            <div class="compare-item">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+              <div class="compare-item-content">
+                <strong>Direct Written Directive</strong>
+                <span>WhatsApp message archives verify that the intermediary explicitly ordered the students to withdraw from their existing classes.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Assumptions / Opinions -->
+        <div class="compare-col compare-claims">
+          <h3 class="compare-col-title">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            Opinions & Claims
+          </h3>
+          <div class="compare-list">
+            <div class="compare-item">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+              <div class="compare-item-content">
+                <strong>Assumed Intentions</strong>
+                <span>Speculations regarding whether the intermediary planned this outcomes from the start, or simply suffered operational failures.</span>
+              </div>
+            </div>
+            <div class="compare-item">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+              <div class="compare-item-content">
+                <strong>Third-party Rumours</strong>
+                <span>Local gossips or social rumors suggesting the intermediary has engaged in similar operations with other families in the area.</span>
+              </div>
+            </div>
+            <div class="compare-item">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+              <div class="compare-item-content">
+                <strong>Speculative Destination of Money</strong>
+                <span>Assumptions regarding exactly how the $7,700 was spent, in the absence of verified bank trace records.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       LESSONS LEARNED
+       ========================================== -->
+  <section id="lessons" class="section">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2 class="section-title">Lessons & Precautions</h2>
+        <p class="section-subtitle">
+          Essential warning checkpoints derived from this incident to protect other families and students.
+        </p>
+      </div>
+      
+      <div class="lessons-grid">
+        <!-- Card 1 -->
+        <div class="lesson-card">
+          <div class="lesson-card-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          </div>
+          <div class="lesson-card-content">
+            <h4>Never Exit Previous Enrolments Prematurely</h4>
+            <p>Do not withdraw from an active college until you hold the official, validated, and university-signed admission docket for the next institution.</p>
+          </div>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="lesson-card">
+          <div class="lesson-card-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          </div>
+          <div class="lesson-card-content">
+            <h4>Reject Verbal Promises Completely</h4>
+            <p>Verbal statements and friendly relationships cannot substitute for official portal registrations. Always verify information through written reports.</p>
+          </div>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="lesson-card">
+          <div class="lesson-card-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          </div>
+          <div class="lesson-card-content">
+            <h4>Verify Directly with Universities</h4>
+            <p>Contact the registrar’s admissions office directly via official website emails or public phone numbers to confirm receipt of applications and files.</p>
+          </div>
+        </div>
+        
+        <!-- Card 4 -->
+        <div class="lesson-card">
+          <div class="lesson-card-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          </div>
+          <div class="lesson-card-content">
+            <h4>Request Official Written Receipts</h4>
+            <p>Every single tuition installment or fee deposit must yield an official cashier receipt generated directly by the university system.</p>
+          </div>
+        </div>
+        
+        <!-- Card 5 -->
+        <div class="lesson-card">
+          <div class="lesson-card-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          </div>
+          <div class="lesson-card-content">
+            <h4>Keep Meticulous Payment Records</h4>
+            <p>Maintain precise bank statement records, references, chats, and date logs of all interactions. This serves as critical legal verification later.</p>
+          </div>
+        </div>
+        
+        <!-- Card 6 -->
+        <div class="lesson-card">
+          <div class="lesson-card-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          </div>
+          <div class="lesson-card-content">
+            <h4>Seek Legal Counsel Early</h4>
+            <p>At the first sign of systematic deflection or refusal to provide verification, consult with licensed legal professionals to protect your interests.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       DOCUMENTS ARCHIVE
+       ========================================== -->
+  <section id="archive" class="section" style="background-color: var(--bg-secondary);">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2 class="section-title">Documents Archive</h2>
+        <p class="section-subtitle">
+          Search and access the complete inventory of verified records, transcripts, and official letters.
+        </p>
+      </div>
+      
+      <div class="archive-bar">
+        <div class="search-box">
+          <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <input type="text" id="archiveSearch" placeholder="Search archive by document title, type, category, or ref number...">
+        </div>
+      </div>
+      
+      <div class="archive-grid">
+        <!-- Archive Item 1 -->
+        <div class="archive-card">
+          <div class="archive-thumb" onclick="triggerEvidenceModal('bank-transfer-1')">
+            <div class="archive-thumb-overlay">PREVIEW PDF RECORD</div>
+            <svg style="width:64px; height:64px; color: var(--text-muted);" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          </div>
+          <div class="archive-info">
+            <h3 class="archive-title">Initial Deposit Statement</h3>
+            <div class="archive-meta">
+              <span>Category: Bank</span>
+              <span>Size: 1.2 MB</span>
+            </div>
+            <p class="archive-desc">IMPS transfer confirmation detailing the first installment payment of $4,200 to intermediary's accounts.</p>
+            <div class="archive-actions">
+              <button onclick="triggerEvidenceModal('bank-transfer-1')" class="btn btn-secondary">Open Viewer</button>
+              <button class="btn btn-primary" onclick="alert('Downloading file...')">Download PDF</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Archive Item 2 -->
+        <div class="archive-card">
+          <div class="archive-thumb" onclick="triggerEvidenceModal('bank-transfer-2')">
+            <div class="archive-thumb-overlay">PREVIEW PDF RECORD</div>
+            <svg style="width:64px; height:64px; color: var(--text-muted);" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          </div>
+          <div class="archive-info">
+            <h3 class="archive-title">Tuition Fee Advance Voucher</h3>
+            <div class="archive-meta">
+              <span>Category: Bank</span>
+              <span>Size: 890 KB</span>
+            </div>
+            <p class="archive-desc">Bank ledger entry representing the second payment transfer ($3,500) specifically marked for admission processing.</p>
+            <div class="archive-actions">
+              <button onclick="triggerEvidenceModal('bank-transfer-2')" class="btn btn-secondary">Open Viewer</button>
+              <button class="btn btn-primary" onclick="alert('Downloading file...')">Download PDF</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Archive Item 3 -->
+        <div class="archive-card">
+          <div class="archive-thumb" onclick="triggerEvidenceModal('whatsapp-chat-1')">
+            <div class="archive-thumb-overlay">PREVIEW TRANSCRIPT</div>
+            <svg style="width:64px; height:64px; color: var(--text-muted);" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+          </div>
+          <div class="archive-info">
+            <h3 class="archive-title">Admission Assurance Chats</h3>
+            <div class="archive-meta">
+              <span>Category: Chats</span>
+              <span>Size: 410 KB</span>
+            </div>
+            <p class="archive-desc">WhatsApp thread transcript records showing the intermediary claiming deans and registrar representatives had approved all files.</p>
+            <div class="archive-actions">
+              <button onclick="triggerEvidenceModal('whatsapp-chat-1')" class="btn btn-secondary">Open Viewer</button>
+              <button class="btn btn-primary" onclick="alert('Downloading file...')">Download PDF</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Archive Item 4 -->
+        <div class="archive-card">
+          <div class="archive-thumb" onclick="triggerEvidenceModal('whatsapp-chat-2')">
+            <div class="archive-thumb-overlay">PREVIEW TRANSCRIPT</div>
+            <svg style="width:64px; height:64px; color: var(--text-muted);" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+          </div>
+          <div class="archive-info">
+            <h3 class="archive-title">Withdrawal Order Chats</h3>
+            <div class="archive-meta">
+              <span>Category: Chats</span>
+              <span>Size: 380 KB</span>
+            </div>
+            <p class="archive-desc">WhatsApp transcript proving the intermediary commanded the students to withdraw from their existing classes immediately.</p>
+            <div class="archive-actions">
+              <button onclick="triggerEvidenceModal('whatsapp-chat-2')" class="btn btn-secondary">Open Viewer</button>
+              <button class="btn btn-primary" onclick="alert('Downloading file...')">Download PDF</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Archive Item 5 -->
+        <div class="archive-card">
+          <div class="archive-thumb" onclick="triggerEvidenceModal('university-response-1')">
+            <div class="archive-thumb-overlay">PREVIEW LETTER</div>
+            <svg style="width:64px; height:64px; color: var(--text-muted);" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+          </div>
+          <div class="archive-info">
+            <h3 class="archive-title">Registrar Enrollment Verification</h3>
+            <div class="archive-meta">
+              <span>Category: University</span>
+              <span>Size: 640 KB</span>
+            </div>
+            <p class="archive-desc">Official, registrar-signed confirmation letter confirming that the university holds zero records or applications for the students.</p>
+            <div class="archive-actions">
+              <button onclick="triggerEvidenceModal('university-response-1')" class="btn btn-secondary">Open Viewer</button>
+              <button class="btn btn-primary" onclick="alert('Downloading file...')">Download PDF</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Archive Item 6 -->
+        <div class="archive-card">
+          <div class="archive-thumb" onclick="triggerEvidenceModal('legal-notice-1')">
+            <div class="archive-thumb-overlay">PREVIEW DEMAND</div>
+            <svg style="width:64px; height:64px; color: var(--text-muted);" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+          </div>
+          <div class="archive-info">
+            <h3 class="archive-title">Legal Demand Notice Notice</h3>
+            <div class="archive-meta">
+              <span>Category: Legal</span>
+              <span>Size: 1.5 MB</span>
+            </div>
+            <p class="archive-desc">Attorney-issued formal request letter demanding credit transfer verification or full restitution of deposited funds.</p>
+            <div class="archive-actions">
+              <button onclick="triggerEvidenceModal('legal-notice-1')" class="btn btn-secondary">Open Viewer</button>
+              <button class="btn btn-primary" onclick="alert('Downloading file...')">Download PDF</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FAQ SECTION
+       ========================================== -->
+  <section id="faq" class="section">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">
+          Clarifying the nature, truthfulness, and purpose of this investigative incident report archive.
+        </p>
+      </div>
+      
+      <div class="faq-container">
+        <!-- Q1 -->
+        <div class="faq-item">
+          <button class="faq-question-btn">
+            Why was this website created?
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              This website was created to chronologically compile and document our experience regarding an alleged education-related fraud using verified files. By sharing bank receipts, WhatsApp correspondence, and university verification replies, we aim to warn other families from falling victim to similar third-party credit transfer representations.
+            </div>
+          </div>
+        </div>
+        
+        <!-- Q2 -->
+        <div class="faq-item">
+          <button class="faq-question-btn">
+            Is this a legal complaint?
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              No, this website is not a formal legal complaint or a court filing. It is an independent public documentation of factual occurrences. Formal legal notices and demand actions have been handled separately by licensed legal attorneys representing the affected families.
+            </div>
+          </div>
+        </div>
+        
+        <!-- Q3 -->
+        <div class="faq-item">
+          <button class="faq-question-btn">
+            Are the documents genuine?
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Yes, all documents in the archive correspond directly to actual records, bank transaction logs, communication logs, and signed statements from the registrar. We have only edited personal identification numbers and addresses to comply with privacy regulations.
+            </div>
+          </div>
+        </div>
+        
+        <!-- Q4 -->
+        <div class="faq-item">
+          <button class="faq-question-btn">
+            Can more evidence be added?
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Yes. If additional communications, transaction records, or replies are uncovered, they will be updated in the timeline and archive after thorough legal verification. If you have relevant information, please reach out via the contact form.
+            </div>
+          </div>
+        </div>
+        
+        <!-- Q5 -->
+        <div class="faq-item">
+          <button class="faq-question-btn">
+            How can someone report a similar experience?
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              If you have experienced similar unfulfilled credit transfer representations involving the same intermediary, please submit details via our Contact form. You may also contact consumer protection boards or local police commands directly.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CONTACT / AUDIT FORM
+       ========================================== -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2 class="section-title">Submit Information</h2>
+        <p class="section-subtitle">
+          If you have information, receipts, or correspondence to submit for validation, please use this form.
+        </p>
+      </div>
+      
+      <div class="contact-container">
+        <form id="contactForm" class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contactName" class="form-label">Full Name *</label>
+              <input type="text" id="contactName" class="form-control" placeholder="Jane Doe" required>
+            </div>
+            <div class="form-group">
+              <label for="contactEmail" class="form-label">Email Address *</label>
+              <input type="email" id="contactEmail" class="form-control" placeholder="jane@example.com" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="contactSubject" class="form-label">Subject</label>
+            <input type="text" id="contactSubject" class="form-control" placeholder="e.g. Additional Chat logs / Transaction records">
+          </div>
+          
+          <div class="form-group">
+            <label for="contactMessage" class="form-label">Information / Statement Details *</label>
+            <textarea id="contactMessage" class="form-control" placeholder="Provide detailed statement, including dates, names, and description of records in your possession..." required></textarea>
+          </div>
+          
+          <div style="text-align: right;">
+            <button type="submit" class="btn btn-primary">Submit Record Details</button>
+          </div>
+          
+          <div id="formFeedback" class="form-feedback"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       GLOBAL FOOTER & LEGAL DISCLAIMERS
+       ========================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo">
+        <span>TRUTH</span>&nbsp;&amp;&nbsp;EVIDENCE
+      </div>
+      
+      <p class="footer-disclaimer">
+        <strong>Legal Disclaimer:</strong> This website is intended to document our experience using available evidence. It is not intended to harass, threaten, or defame any individual. Readers should review the evidence independently. Any person mentioned may contact us to provide clarifications or corrections supported by evidence.
+      </p>
+      
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Truth & Evidence Case Ledger. All rights reserved.
+        </div>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Back to Top</a>
+          <a href="#evidence" class="footer-link">Verify Records</a>
+          <a href="#contact" class="footer-link">Submit Feedback</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       MODAL DOCUMENT VIEWER (NATIVE DIALOG)
+       ========================================== -->
+  <dialog id="docModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle" class="modal-title">Document Title</h3>
+        <button id="modalCloseBtn" class="modal-close-btn" aria-label="Close document viewer">
+          <svg style="width:24px; height:24px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      
+      <div id="modalBody" class="modal-body">
+        <!-- High-fidelity mockup generated dynamically in app.js -->
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="document.querySelector('#docModal').close()">Close</button>
+        <button id="modalDownloadBtn" class="btn btn-primary">Download Secure PDF</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Main JavaScript bundle -->
+  <script src="app.js"></script>
+</body>
+</html>
