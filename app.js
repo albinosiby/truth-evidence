@@ -1,6 +1,6 @@
 /* ==========================================================================
    TRUTH & EVIDENCE - JAVASCRIPT
-   Core website functionality & interactive handlers (CONDENSED & STREAMLINED)
+   Core website functionality & category-based explorer (SECURE DOSSIER)
    ========================================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,12 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
       setTheme(systemPrefersDark ? 'dark' : 'light');
     }
   };
-
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('color-scheme')) {
-      setTheme(e.matches ? 'dark' : 'light');
-    }
-  });
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', toggleTheme);
@@ -89,56 +83,76 @@ document.addEventListener('DOMContentLoaded', () => {
     timelineObserver.observe(card);
   });
 
-  // === 4. STREAMLINED EVIDENCE DATABASE & MODAL VIEW ===
-  const docDatabase = {
-    'bank-transfer-1': {
-      title: 'Initial Security Deposit Receipt',
-      category: 'Bank Transactions',
-      date: 'Aug 14, 2024',
-      size: '1.2 MB',
-      type: 'PDF Preview',
-      desc: 'IMPS bank transfer confirmation representing the initial security deposit for college credit transfer.',
-      mockupType: 'bank',
-      bankName: 'METROPOLIS MUTUAL BANK',
-      refNo: 'TXN8892019927A',
-      from: 'Student Family Account (Acct ending in *4910)',
-      to: 'Intermediary Account (Acct ending in *8372)',
-      amount: '$1,200.00',
-      status: 'SUCCESSFUL / SETTLED',
-      notes: 'This transfer represents the initial advance requested to secure credit transfer allocations. No official university receipt was ever provided in return.'
+  // === 4. CATEGORY DATABASE ===
+  const proofDatabase = {
+    'chat': {
+      title: 'Chat Proof Archive',
+      files: [
+        {
+          name: 'WhatsApp Conversation Screenshot #1',
+          date: 'Aug 10, 2024',
+          size: '410 KB',
+          gitLink: './chats/chat_screenshot.png'
+        },
+        {
+          name: 'WhatsApp Conversation Screenshot #2',
+          date: 'Sep 05, 2024',
+          size: '380 KB',
+          gitLink: './chats/chat_screenshot_2.png'
+        },
+        {
+          name: 'WhatsApp Conversation Screenshot #3',
+          date: 'Sep 12, 2024',
+          size: '450 KB',
+          gitLink: './chats/chat_screenshot_3.png'
+        }
+      ]
     },
-    'whatsapp-chat-2': {
-      title: 'Instruction to Discontinue Studies',
-      category: 'WhatsApp Chats',
-      date: 'Sep 05, 2024',
-      size: '380 KB',
-      type: 'Chat Transcript',
-      desc: 'Critical WhatsApp messages advising students to discontinue attending classes at their previous college immediately.',
-      mockupType: 'whatsapp',
-      messages: [
-        { sender: 'Intermediary', time: '04:12 PM', text: 'The admission files are finalized. The students must discontinue attending classes at their current college immediately. If they continue registered there, the database will block their fresh registration.', type: 'received' },
-        { sender: 'Student', time: '04:18 PM', text: 'Are you sure we should stop going? We haven\'t received the formal admission slips yet.', type: 'sent' },
-        { sender: 'Intermediary', time: '04:22 PM', text: 'Yes, absolutely sure. The enrollment window starts next week. If you don\'t withdraw now, it will delay the credit transcript transfer.', type: 'received' },
-        { sender: 'Student', time: '04:30 PM', text: 'Okay, we will submit the withdrawal letters tomorrow.', type: 'sent' }
-      ],
-      notes: 'This instruction directly led to the students terminating their enrollment at their active college, resulting in academic loss.'
+    'audio': {
+      title: 'Audio Proof Archive',
+      files: [
+        {
+          name: 'Audio Call Recording #1',
+          date: 'Oct 20, 2024',
+          size: '1.8 MB',
+          gitLink: './audio/audio_record.mp3'
+        },
+        {
+          name: 'Audio Call Recording #2',
+          date: 'Oct 28, 2024',
+          size: '1.5 MB',
+          gitLink: './audio/audio_record_2.mp3'
+        },
+        {
+          name: 'Audio Call Recording #3',
+          date: 'Nov 02, 2024',
+          size: '2.1 MB',
+          gitLink: './audio/audio_record_3.mp3'
+        }
+      ]
     },
-    'university-response-1': {
-      title: 'Registrar Inquiry Response',
-      category: 'University Responses',
-      date: 'Nov 12, 2024',
-      size: '640 KB',
-      type: 'Official Letter',
-      desc: 'Official response from the University Admissions Registrar confirming that no application or tuition fee was ever received.',
-      mockupType: 'letter',
-      logoText: 'STATE UNIVERSITY OF SCIENCE',
-      refNo: 'REG/2024/7781-INF',
-      dateStr: 'November 12, 2024',
-      to: 'Student Guardian Representatives\nMetropolis Area Council',
-      subject: 'RE: ENROLLMENT STATUS INQUIRY',
-      body: 'Dear Guardians, we write in response to your query regarding the enrollment status of the students. Following a search of our database, our records indicate that no applications for admission, requests for credit transfer, or associated fee payments have been submitted under the names of the aforementioned individuals. The university does not utilize third-party intermediaries for student enrollment management.',
-      signText: 'Office of the Registrar\nState University of Science Admissions Board',
-      notes: 'Official proof verifying that the admission process was never initiated by the intermediary.'
+    'payment': {
+      title: 'Payment Proof Archive',
+      files: [
+        {
+          name: 'Payment Transaction Screenshot #1',
+          date: 'Aug 14, 2024',
+          size: '1.2 MB',
+          gitLink: './receipts/payment_screenshot.png'
+        },
+        {
+          name: 'Payment Transaction Screenshot #2',
+          date: 'Sep 02, 2024',
+          size: '890 KB',
+          gitLink: './receipts/payment_screenshot_2.png'
+        },
+        {
+          name: 'Payment Transaction Screenshot #3',
+          date: 'Sep 18, 2024',
+          size: '1.1 MB',
+          gitLink: './receipts/payment_screenshot_3.png'
+        }
+      ]
     }
   };
 
@@ -148,125 +162,109 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalBody = document.querySelector('#modalBody');
   const modalTitle = document.querySelector('#modalTitle');
 
-  const openDocumentModal = (docId) => {
-    if (!modal || !modalBody || !modalTitle) return;
-    const doc = docDatabase[docId];
-    if (!doc) return;
+  // Hide the original download button (no download buttons allowed in secure layout)
+  if (modalDownloadBtn) {
+    modalDownloadBtn.style.display = 'none';
+  }
 
-    modalTitle.textContent = doc.title;
+  // Render Category File Explorer List
+  const renderCategoryExplorer = (categoryKey) => {
+    if (!modalBody || !modalTitle) return;
+    const cat = proofDatabase[categoryKey];
+    if (!cat) return;
+
+    modalTitle.textContent = cat.title;
+    modalBody.innerHTML = '';
+
+    const listContainer = document.createElement('div');
+    listContainer.className = 'explorer-list';
+    listContainer.style.display = 'flex';
+    listContainer.style.flexDirection = 'column';
+    listContainer.style.gap = '0.75rem';
+    listContainer.style.padding = '0.5rem 0';
+
+    cat.files.forEach(file => {
+      const item = document.createElement('div');
+      item.className = 'explorer-item';
+      item.style.display = 'flex';
+      item.style.justifyContent = 'space-between';
+      item.style.alignItems = 'center';
+      item.style.padding = '1rem';
+      item.style.backgroundColor = 'var(--bg-secondary)';
+      item.style.border = '1px solid var(--border-color)';
+      item.style.borderRadius = 'var(--border-radius-sm)';
+      item.style.gap = '1rem';
+
+      let controlHTML = '';
+      if (categoryKey === 'audio') {
+        controlHTML = `
+          <audio controls controlsList="nodownload" style="height: 38px; max-width: 220px;">
+            <source src="${file.gitLink}" type="audio/mp3">
+            Audio playback not supported.
+          </audio>
+        `;
+      } else {
+        controlHTML = `
+          <button class="btn btn-primary" onclick="openSecureLightbox('${file.gitLink}', '${categoryKey}')" style="padding: 0.4rem 1rem; font-size: 0.85rem; border: none; border-radius: var(--border-radius-sm);">Open</button>
+        `;
+      }
+
+      item.innerHTML = `
+        <div style="flex-grow: 1;">
+          <h4 style="margin: 0 0 0.25rem; font-size: 0.95rem; font-weight: 600; color: var(--text-primary); font-family: var(--font-display);">${file.name}</h4>
+          <div style="font-size: 0.78rem; color: var(--text-muted);">${file.date} &bull; ${file.size}</div>
+        </div>
+        <div>
+          ${controlHTML}
+        </div>
+      `;
+      listContainer.appendChild(item);
+    });
+
+    modalBody.appendChild(listContainer);
+  };
+
+  // Open Secure Image Lightbox Viewer inside the modal
+  window.openSecureLightbox = (imgSrc, categoryKey) => {
+    if (!modalBody) return;
+    
     modalBody.innerHTML = '';
     
-    const docViewerDiv = document.createElement('div');
-    docViewerDiv.className = 'doc-viewer';
-    
-    let mockupHTML = '';
-    
-    if (doc.mockupType === 'bank') {
-      mockupHTML = `
-        <div class="doc-mockup doc-bank-transaction">
-          <div class="bank-header">
-            <div>
-              <div class="bank-name">${doc.bankName}</div>
-              <div style="font-size:0.75rem; color:#868e96;">ELECTRONIC TRANSACTION VOUCHER</div>
-            </div>
-            <div class="bank-title">TRANSFER CONFIRMATION</div>
-          </div>
-          <div class="bank-details-grid">
-            <div class="bank-detail-item">
-              <div class="bank-detail-label">Transaction Reference</div>
-              <div class="bank-detail-val">${doc.refNo}</div>
-            </div>
-            <div class="bank-detail-item">
-              <div class="bank-detail-label">Value Date</div>
-              <div class="bank-detail-val">${doc.date}</div>
-            </div>
-            <div class="bank-detail-item">
-              <div class="bank-detail-label">Debited From</div>
-              <div class="bank-detail-val">${doc.from}</div>
-            </div>
-            <div class="bank-detail-item">
-              <div class="bank-detail-label">Beneficiary Account</div>
-              <div class="bank-detail-val">${doc.to}</div>
-            </div>
-            <div class="bank-detail-item">
-              <div class="bank-detail-label">Transaction Status</div>
-              <div class="bank-detail-val" style="color:#2b8a3e; font-weight:700;">${doc.status}</div>
-            </div>
-          </div>
-          <div class="bank-amount-box">
-            <div class="bank-amount-label">AMOUNT TRANSFERRED</div>
-            <div class="bank-amount-val">${doc.amount}</div>
-          </div>
-        </div>
-      `;
-    } else if (doc.mockupType === 'whatsapp') {
-      const chatMessages = doc.messages.map(m => `
-        <div class="chat-bubble ${m.type}">
-          <div class="chat-bubble-sender">${m.sender}</div>
-          <div>${m.text}</div>
-          <span class="chat-bubble-time">${m.time}</span>
-        </div>
-      `).join('');
-      
-      mockupHTML = `
-        <div class="doc-mockup" style="background-color: #f0f2f5; padding: 1.5rem;">
-          <div style="background-color:#008069; color:#ffffff; padding:0.75rem 1rem; border-radius: var(--border-radius-sm); margin-bottom:1rem; font-family:var(--font-display); font-weight:600; display:flex; align-items:center; gap:0.5rem;">
-            WhatsApp Transcript
-          </div>
-          <div class="doc-whatsapp-chat">
-            ${chatMessages}
-          </div>
-        </div>
-      `;
-    } else if (doc.mockupType === 'letter') {
-      mockupHTML = `
-        <div class="doc-mockup doc-official-letter">
-          <div class="letter-header">
-            <div class="letter-logo-text">${doc.logoText}</div>
-            <div class="letter-meta">
-              <div>Ref: ${doc.refNo}</div>
-              <div>Date: ${doc.dateStr}</div>
-            </div>
-          </div>
-          <div class="letter-to">
-            <strong>TO:</strong><br>
-            ${doc.to.replace('\n', '<br>')}
-          </div>
-          <div class="letter-subject">
-            <strong>SUBJECT:</strong> ${doc.subject}
-          </div>
-          <div class="letter-body">
-            ${doc.body}
-          </div>
-          <div class="letter-sign">
-            <strong>Sincerely,</strong><br>
-            <span style="font-family: 'Outfit'; font-size:0.85rem; font-style:italic;">${doc.signText.split('\n')[0]}</span><br>
-            <span style="font-size:0.75rem; color:#6c757d;">${doc.signText.split('\n')[1]}</span>
-          </div>
-          <div class="letter-stamp">
-            OFFICIAL<br>REGISTRAR RECORD
-          </div>
-        </div>
-      `;
-    }
+    const lightboxDiv = document.createElement('div');
+    lightboxDiv.className = 'lightbox-view';
+    lightboxDiv.style.textAlign = 'center';
 
-    docViewerDiv.innerHTML = `
-      ${mockupHTML}
-      <div class="doc-notes">
-        <h5>Verified Incident Context</h5>
-        <p>${doc.notes}</p>
+    lightboxDiv.innerHTML = `
+      <div style="text-align: left; margin-bottom: 1rem;">
+        <button class="btn btn-secondary" onclick="goBackToExplorer('${categoryKey}')" style="padding: 0.4rem 1rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid var(--border-color); background-color: var(--bg-primary); border-radius: var(--border-radius-sm); cursor: pointer;">
+          <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+          Back to list
+        </button>
+      </div>
+      <div class="secure-image-container">
+        <img src="${imgSrc}" alt="Secure Proof Preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display: none; padding: 2rem; background-color: var(--bg-tertiary); border: 1px dashed var(--accent); border-radius: var(--border-radius-sm); text-align: left; max-width: 480px; margin: auto;">
+          <h5 style="color: var(--accent); margin: 0 0 0.5rem; font-family: var(--font-display); font-weight: 700; text-transform: uppercase;">Proof Document File Missing</h5>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">
+            The proof screenshot file at <code>${imgSrc}</code> is currently not found. Please upload/commit your screenshot file inside your repository folders to load it here.
+          </p>
+        </div>
+        <div class="secure-image-overlay">
+          <div class="secure-image-watermark-text">TRUTH & EVIDENCE - CONFIDENTIAL</div>
+        </div>
       </div>
     `;
-    
-    modalBody.appendChild(docViewerDiv);
-    
-    if (modalDownloadBtn) {
-      modalDownloadBtn.onclick = () => {
-        alert(`Downloading ${doc.title} (${doc.size}) as a secure PDF.`);
-      };
-    }
-    
-    modal.showModal();
+
+    modalBody.appendChild(lightboxDiv);
+  };
+
+  window.goBackToExplorer = (categoryKey) => {
+    renderCategoryExplorer(categoryKey);
+  };
+
+  window.openCategoryModal = (categoryKey) => {
+    renderCategoryExplorer(categoryKey);
+    if (modal) modal.showModal();
   };
 
   if (modalCloseBtn && modal) {
@@ -287,50 +285,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  window.triggerEvidenceModal = (docId) => {
-    openDocumentModal(docId);
-  };
+  // === 5. STRICT SECURITY ENFORCEMENT ===
+  // Block right-clicks page-wide
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+  });
 
-  // === 5. UNIFIED ARCHIVE FILTERING AND SEARCHING ===
-  const archiveSearch = document.querySelector('#archiveSearch');
-  const filterButtons = document.querySelectorAll('.archive-filters .filter-btn');
-  const archiveCards = document.querySelectorAll('.archive-grid .archive-card');
+  // Block dragging actions page-wide
+  document.addEventListener('dragstart', (e) => {
+    e.preventDefault();
+  });
 
-  let activeCategory = 'all';
-  let searchQuery = '';
-
-  const filterAndSearchArchive = () => {
-    archiveCards.forEach(card => {
-      const title = card.querySelector('.archive-title').textContent.toLowerCase();
-      const desc = card.querySelector('.archive-desc').textContent.toLowerCase();
-      const meta = card.querySelector('.archive-meta').textContent.toLowerCase();
-      const cardCat = card.getAttribute('data-category');
-
-      const matchesSearch = title.includes(searchQuery) || desc.includes(searchQuery) || meta.includes(searchQuery);
-      const matchesCategory = activeCategory === 'all' || cardCat === activeCategory;
-
-      if (matchesSearch && matchesCategory) {
-        card.style.display = 'flex';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  };
-
-  if (archiveSearch) {
-    archiveSearch.addEventListener('input', () => {
-      searchQuery = archiveSearch.value.toLowerCase().trim();
-      filterAndSearchArchive();
-    });
-  }
-
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      filterButtons.forEach(b => b.classList.remove('active'));
-      e.target.classList.add('active');
-      activeCategory = e.target.getAttribute('data-filter');
-      filterAndSearchArchive();
-    });
+  // Block print / save hotkeys page-wide
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S')) {
+      e.preventDefault();
+      alert('Action disabled for security and confidentiality reasons.');
+    }
   });
 
   // === 6. FAQ ACCORDION HANDLERS ===
