@@ -3,6 +3,15 @@
    Core website functionality & category-based explorer (SECURE DOSSIER)
    ========================================================================= */
 
+// === CUSTOM FILENAMES CONFIGURATION ===
+// (Optional fallback) If directory listing is disabled on your production server,
+// you can list your custom file names here to ensure they load.
+const customFilesConfig = {
+  'chat': [],
+  'audio': [],
+  'payment': []
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   // === 1. THEME MANAGEMENT (DARK MODE) ===
   const themeToggleBtn = document.querySelector('#themeToggle');
@@ -83,86 +92,192 @@ document.addEventListener('DOMContentLoaded', () => {
     timelineObserver.observe(card);
   });
 
-  // === 4. CATEGORY DATABASE ===
+  // === 4. CATEGORY DATABASE AND DYNAMIC INDEX SCANNER ===
   const proofDatabase = {
-    'chat': {
-      title: 'Chat Proof Archive',
-      files: [
-        {
-          name: 'WhatsApp Conversation Screenshot #1',
-          date: 'Aug 10, 2024',
-          size: '410 KB',
-          gitLink: './chats/chat_screenshot.png'
-        },
-        {
-          name: 'WhatsApp Conversation Screenshot #2',
-          date: 'Sep 05, 2024',
-          size: '380 KB',
-          gitLink: './chats/chat_screenshot_2.png'
-        },
-        {
-          name: 'WhatsApp Conversation Screenshot #3',
-          date: 'Sep 12, 2024',
-          size: '450 KB',
-          gitLink: './chats/chat_screenshot_3.png'
-        }
-      ]
-    },
-    'audio': {
-      title: 'Audio Proof Archive',
-      files: [
-        {
-          name: 'Audio Call Recording #1',
-          date: 'Oct 20, 2024',
-          size: '1.8 MB',
-          gitLink: './audio/audio_record.mp3'
-        },
-        {
-          name: 'Audio Call Recording #2',
-          date: 'Oct 28, 2024',
-          size: '1.5 MB',
-          gitLink: './audio/audio_record_2.mp3'
-        },
-        {
-          name: 'Audio Call Recording #3',
-          date: 'Nov 02, 2024',
-          size: '2.1 MB',
-          gitLink: './audio/audio_record_3.mp3'
-        }
-      ]
-    },
-    'payment': {
-      title: 'Payment Proof Archive',
-      files: [
-        {
-          name: 'Payment Transaction Screenshot #1',
-          date: 'Aug 14, 2024',
-          size: '1.2 MB',
-          gitLink: './receipts/payment_screenshot.png'
-        },
-        {
-          name: 'Payment Transaction Screenshot #2',
-          date: 'Sep 02, 2024',
-          size: '890 KB',
-          gitLink: './receipts/payment_screenshot_2.png'
-        },
-        {
-          name: 'Payment Transaction Screenshot #3',
-          date: 'Sep 18, 2024',
-          size: '1.1 MB',
-          gitLink: './receipts/payment_screenshot_3.png'
-        }
-      ]
-    }
+    'chat': { title: 'Chat Proof Folder', files: [] },
+    'audio': { title: 'Audio Proof Folder', files: [] },
+    'payment': { title: 'Payment Proof Folder', files: [] }
   };
 
+  // Fallbacks to show naming instructions if folders are empty
+  const defaultFallbacks = {
+    'chat': [
+      { name: 'chat_screenshot.png (Missing)', gitLink: './chats/chat_screenshot.png', isPlaceholder: true }
+    ],
+    'audio': [
+      { name: 'audio_record.mp3 (Missing)', gitLink: './audio/audio_record.mp3', isPlaceholder: true }
+    ],
+    'payment': [
+      { name: 'payment_screenshot.png (Missing)', gitLink: './receipts/payment_screenshot.png', isPlaceholder: true }
+    ]
+  };
+
+  // Detect and load committed repository files dynamically
+  const detectAndLoadFiles = async () => {
+    const categories = {
+      'chat': {
+        folder: './chats/',
+        prefix: './chats/chat_screenshot',
+        extensions: ['png', 'jpg', 'jpeg'],
+        files: []
+      },
+      'audio': {
+        folder: './audio/',
+        prefix: './audio/audio_record',
+        extensions: ['mp3', 'wav'],
+        files: []
+      },
+      'payment': {
+        folder: './receipts/',
+        prefix: './receipts/payment_screenshot',
+        extensions: ['png', 'jpg', 'jpeg', 'pdf'],
+        files: []
+      }
+    };
+
+    const checkFileExists = async (url) => {
+      try {
+        const response = await fetch(url, { method: 'HEAD' });
+        return response.ok;
+      } catch (e) {
+        return false;
+      }
+    };
+
+    // Scrapes the web server folder directory listing if indexing is enabled
+    const scrapeDirectoryIndex = async (folderUrl, extensions) => {
+      try {
+        const res = await fetch(folderUrl);
+        if (!res.ok) return [];
+        
+        const contentType = res.headers.get('content-type') || '';
+        if (!contentType.includes('text/html')) return []; // Server did not return HTML list
+
+        const html = await res.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const links = Array.from(doc.querySelectorAll('a'));
+        
+        const filesFound = [];
+        links.forEach(link => {
+          const href = link.getAttribute('href');
+          if (!href) return;
+          
+          const filename = decodeURIComponent(href);
+          const ext = filename.split('.').pop().toLowerCase();
+          
+          if (extensions.includes(ext) && !filename.includes('/') && filename !== '..' && filename !== '.') {
+            filesFound.push({
+              name: filename,
+              gitLink: `${folderUrl}${href}`
+            });
+          }
+        });
+        return filesFound;
+      } catch (e) {
+        return [];
+      }
+    };
+
+    for (const key of Object.keys(categories)) {
+      const cat = categories[key];
+      
+      // Step A: Attempt folder HTML index scraping (ideal for http-server, local dev)
+      let foundFiles = await scrapeDirectoryIndex(cat.folder, cat.extensions);
+      
+      // Step B: Fallback to loop scanner if scraping fails or returns nothing
+      if (foundFiles.length === 0) {
+        // 1. Check custom configurations
+        const customList = customFilesConfig[key] || [];
+        for (const customName of customList) {
+          const url = `${cat.folder}${customName}`;
+          const exists = await checkFileExists(url);
+          if (exists) {
+            foundFiles.push({ name: customName, gitLink: url });
+          }
+        }
+
+        // 2. Check direct baseline file (e.g. chat_screenshot.png)
+        for (const ext of cat.extensions) {
+          const url = `${cat.prefix}.${ext}`;
+          const exists = await checkFileExists(url);
+          if (exists) {
+            const filename = url.substring(url.lastIndexOf('/') + 1);
+            if (!foundFiles.some(f => f.gitLink === url)) {
+              foundFiles.push({ name: filename, gitLink: url });
+            }
+            break;
+          }
+        }
+
+        // 3. Scan numbered files sequentially (up to 30 files per folder)
+        let consecutiveMissing = 0;
+        for (let i = 1; i <= 30; i++) {
+          let foundForIndex = false;
+          for (const ext of cat.extensions) {
+            const url = `${cat.prefix}_${i}.${ext}`;
+            const exists = await checkFileExists(url);
+            if (exists) {
+              const filename = url.substring(url.lastIndexOf('/') + 1);
+              if (!foundFiles.some(f => f.gitLink === url)) {
+                foundFiles.push({ name: filename, gitLink: url });
+              }
+              foundForIndex = true;
+              consecutiveMissing = 0;
+              break;
+            }
+          }
+          if (!foundForIndex) {
+            consecutiveMissing++;
+            if (consecutiveMissing >= 3) {
+              break;
+            }
+          }
+        }
+      }
+
+      cat.files = foundFiles;
+    }
+
+    // Apply scanned files to database
+    Object.keys(categories).forEach(key => {
+      if (categories[key].files.length > 0) {
+        proofDatabase[key].files = categories[key].files;
+      } else {
+        proofDatabase[key].files = defaultFallbacks[key];
+      }
+    });
+
+    // Update the Category Grid Card badge subtexts
+    Object.keys(proofDatabase).forEach(key => {
+      const card = document.querySelector(`.archive-card[data-category="${key}"]`);
+      if (card) {
+        const fileCountSpan = card.querySelector('.archive-meta span:last-child');
+        if (fileCountSpan) {
+          const files = proofDatabase[key].files;
+          const isPlaceholder = files.length > 0 && files[0].isPlaceholder;
+          if (isPlaceholder) {
+            fileCountSpan.textContent = 'Folder Empty';
+            fileCountSpan.style.color = 'var(--text-muted)';
+          } else {
+            fileCountSpan.textContent = `${files.length} File${files.length > 1 ? 's' : ''}`;
+            fileCountSpan.style.color = 'var(--accent)';
+          }
+        }
+      }
+    });
+  };
+
+  // Run dynamic autodetect scan on start
+  detectAndLoadFiles();
+
+  // === 5. EXPLORER & VIEWER WINDOWS ===
   const modal = document.querySelector('#docModal');
   const modalCloseBtn = document.querySelector('#modalCloseBtn');
   const modalDownloadBtn = document.querySelector('#modalDownloadBtn');
   const modalBody = document.querySelector('#modalBody');
   const modalTitle = document.querySelector('#modalTitle');
 
-  // Hide the original download button (no download buttons allowed in secure layout)
   if (modalDownloadBtn) {
     modalDownloadBtn.style.display = 'none';
   }
@@ -196,7 +311,11 @@ document.addEventListener('DOMContentLoaded', () => {
       item.style.gap = '1rem';
 
       let controlHTML = '';
-      if (categoryKey === 'audio') {
+      if (file.isPlaceholder) {
+        controlHTML = `
+          <span style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;">Awaiting File</span>
+        `;
+      } else if (categoryKey === 'audio') {
         controlHTML = `
           <audio controls controlsList="nodownload" style="height: 38px; max-width: 220px;">
             <source src="${file.gitLink}" type="audio/mp3">
@@ -211,8 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       item.innerHTML = `
         <div style="flex-grow: 1;">
-          <h4 style="margin: 0 0 0.25rem; font-size: 0.95rem; font-weight: 600; color: var(--text-primary); font-family: var(--font-display);">${file.name}</h4>
-          <div style="font-size: 0.78rem; color: var(--text-muted);">${file.date} &bull; ${file.size}</div>
+          <h4 style="margin: 0; font-size: 0.95rem; font-weight: 500; color: var(--text-primary); font-family: var(--font-body);">${file.name}</h4>
         </div>
         <div>
           ${controlHTML}
@@ -246,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div style="display: none; padding: 2rem; background-color: var(--bg-tertiary); border: 1px dashed var(--accent); border-radius: var(--border-radius-sm); text-align: left; max-width: 480px; margin: auto;">
           <h5 style="color: var(--accent); margin: 0 0 0.5rem; font-family: var(--font-display); font-weight: 700; text-transform: uppercase;">Proof Document File Missing</h5>
           <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">
-            The proof screenshot file at <code>${imgSrc}</code> is currently not found. Please upload/commit your screenshot file inside your repository folders to load it here.
+            The proof screenshot file at <code>${imgSrc}</code> is currently not found. Please upload your screenshot file inside your repository folders to load it here.
           </p>
         </div>
         <div class="secure-image-overlay">
@@ -285,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // === 5. STRICT SECURITY ENFORCEMENT ===
+  // === 6. STRICT SECURITY ENFORCEMENT ===
   // Block right-clicks page-wide
   document.addEventListener('contextmenu', (e) => {
     e.preventDefault();
@@ -303,63 +421,4 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Action disabled for security and confidentiality reasons.');
     }
   });
-
-  // === 6. FAQ ACCORDION HANDLERS ===
-  const faqItems = document.querySelectorAll('.faq-item');
-
-  faqItems.forEach(item => {
-    const btn = item.querySelector('.faq-question-btn');
-    const answer = item.querySelector('.faq-answer');
-    
-    btn.addEventListener('click', () => {
-      const isActive = item.classList.contains('active');
-      
-      faqItems.forEach(otherItem => {
-        otherItem.classList.remove('active');
-        otherItem.querySelector('.faq-answer').style.maxHeight = null;
-      });
-      
-      if (!isActive) {
-        item.classList.add('active');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-      } else {
-        item.classList.remove('active');
-        answer.style.maxHeight = null;
-      }
-    });
-  });
-
-  // === 7. CONTACT / AUDIT SUBMISSION FORM ===
-  const contactForm = document.querySelector('#contactForm');
-  const formFeedback = document.querySelector('#formFeedback');
-
-  if (contactForm && formFeedback) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const name = document.querySelector('#contactName').value;
-      const email = document.querySelector('#contactEmail').value;
-      const message = document.querySelector('#contactMessage').value;
-      
-      if (!name || !email || !message) {
-        alert('Please fill out all required fields.');
-        return;
-      }
-      
-      formFeedback.textContent = 'Thank you. Your statement and details have been logged securely. Our legal audit representatives will verify any details provided.';
-      formFeedback.classList.add('success');
-      formFeedback.style.display = 'block';
-      
-      contactForm.reset();
-      
-      setTimeout(() => {
-        formFeedback.style.opacity = '0';
-        formFeedback.style.transition = 'opacity 1s ease';
-        setTimeout(() => {
-          formFeedback.style.display = 'none';
-          formFeedback.style.opacity = '1';
-        }, 1000);
-      }, 7000);
-    });
-  }
 });
